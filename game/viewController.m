@@ -73,7 +73,7 @@
     };
     
     self._verts = [self._view.device newBufferWithBytes:quadVerts
-                                                 length:sizeof(Vertex)
+                                                 length:sizeof(quadVerts)
                                                  options:MTLResourceStorageModeShared];
     self._numVerts = sizeof(quadVerts) / sizeof(Vertex);
 }
@@ -86,11 +86,17 @@
         MTKTextureLoaderOptionTextureUsage : @(MTLTextureUsageShaderRead),
         MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
     };
-    self._texture = [texLoader newTextureWithName:@"youma.jpg"
+    
+    NSError* err;
+    self._texture = [texLoader newTextureWithName:@"youma"
                                       scaleFactor:1.0
                                            bundle:nil
                                           options:texLoadOption
-                                            error:nil];
+                                            error:&err];
+    if(err)
+    {
+        NSLog(@"Error creating texture %@", err.localizedDescription);
+    }
 }
 
 -(void) drawInMTKView:(MTKView *)view

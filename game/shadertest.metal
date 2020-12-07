@@ -35,6 +35,6 @@ samplingShader(RasterizerData input [[stage_in]], // stage_in表示这个数据�
                                       min_filter::linear); // sampler是采样器
     
     half4 colorSample = colorTexture.sample(textureSampler, input.textureCoordinate); // 得到纹理对应位置的颜色
-    
+    //half4 solidColor = {1.0, 1.0, 0.0, 1.0};
     return float4(colorSample);
 }
