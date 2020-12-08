@@ -1,4 +1,4 @@
 # MetalRenPipeline
 
-metak render pipeline, refer:
+metal render pipeline, refer:
 https://github.com/loyinglin/LearnMetal

@@ -1,48 +1,19 @@
 //
-//  ShaderTypes.h
+//  shaderTypes.h
 //  game
 //
-//  Created by 李泽强 on 2020/12/6.
+//  Created by 李泽强 on 2020/12/8.
 //
 
-//
-//  Header containing types and enum constants shared between Metal shaders and Swift/ObjC source
-//
-#ifndef ShaderTypes_h
-#define ShaderTypes_h
+#ifndef shaderTypes_h
+#define shaderTypes_h
 
-#ifdef __METAL_VERSION__
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#define NSInteger metal::int32_t
-#else
-#import <Foundation/Foundation.h>
-#endif
+#import <simd/simd.h>
 
-#include <simd/simd.h>
-
-typedef NS_ENUM(NSInteger, BufferIndex)
+struct Vertex
 {
-    BufferIndexMeshPositions = 0,
-    BufferIndexMeshGenerics  = 1,
-    BufferIndexUniforms      = 2
+    vector_float4 pos;
+    vector_float2 texCoords;
 };
 
-typedef NS_ENUM(NSInteger, VertexAttribute)
-{
-    VertexAttributePosition  = 0,
-    VertexAttributeTexcoord  = 1,
-};
-
-typedef NS_ENUM(NSInteger, TextureIndex)
-{
-    TextureIndexColor    = 0,
-};
-
-typedef struct
-{
-    matrix_float4x4 projectionMatrix;
-    matrix_float4x4 modelViewMatrix;
-} Uniforms;
-
-#endif /* ShaderTypes_h */
-
+#endif /* shaderTypes_h */

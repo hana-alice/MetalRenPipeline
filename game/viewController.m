@@ -84,7 +84,8 @@
     NSDictionary* texLoadOption =
     @{
         MTKTextureLoaderOptionTextureUsage : @(MTLTextureUsageShaderRead),
-        MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
+        MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate),
+        MTKTextureLoaderOptionSRGB: @(false)
     };
     
     NSError* err;

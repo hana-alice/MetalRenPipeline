@@ -52,10 +52,10 @@
 		13414F0E257D26D6000F6BF6 /* shadertest.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = shadertest.metal; sourceTree = "<group>"; };
 		13414F0F257D26D6000F6BF6 /* viewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewController.m; sourceTree = "<group>"; };
 		13414F10257D26D6000F6BF6 /* youma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = youma.jpg; sourceTree = "<group>"; };
-		13414F11257D26D6000F6BF6 /* shaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shaderTypes.h; path = ../../cmdLine/cmdLine/shaderTypes.h; sourceTree = "<group>"; };
 		13414F18257D270C000F6BF6 /* customtypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customtypes.h; sourceTree = "<group>"; };
 		13414F78257E6D60000F6BF6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13414F79257E6D60000F6BF6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1363B2D9257F5FB700726695 /* shaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaderTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 				13414F78257E6D60000F6BF6 /* AppDelegate.h */,
 				13414F79257E6D60000F6BF6 /* AppDelegate.m */,
 				13414F0E257D26D6000F6BF6 /* shadertest.metal */,
-				13414F11257D26D6000F6BF6 /* shaderTypes.h */,
+				1363B2D9257F5FB700726695 /* shaderTypes.h */,
 				13414F0D257D26D6000F6BF6 /* viewController.h */,
 				13414F0F257D26D6000F6BF6 /* viewController.m */,
 				13414F10257D26D6000F6BF6 /* youma.jpg */,
@@ -355,6 +355,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5ZB23A9L9V;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -371,6 +372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"INSTALL_OWNER[sdk=*]" = "$(USER)";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -414,6 +416,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5ZB23A9L9V;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -439,13 +442,14 @@
 				CODE_SIGN_ENTITLEMENTS = game/game.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 5ZB23A9L9V;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = game/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = zeql.game;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -459,13 +463,14 @@
 				CODE_SIGN_ENTITLEMENTS = game/game.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 5ZB23A9L9V;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = game/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = zeql.game;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -477,7 +482,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 52U76478G9;
 				INFOPLIST_FILE = gameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -497,7 +502,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 52U76478G9;
 				INFOPLIST_FILE = gameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -516,7 +521,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 52U76478G9;
 				INFOPLIST_FILE = gameUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -534,7 +539,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L2N5MJ6SNQ;
+				DEVELOPMENT_TEAM = 52U76478G9;
 				INFOPLIST_FILE = gameUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
