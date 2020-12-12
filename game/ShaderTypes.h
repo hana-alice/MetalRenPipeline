@@ -10,10 +10,6 @@
 
 #import <simd/simd.h>
 
-struct Vertex
-{
-    vector_float4 pos;
-    vector_float2 texCoords;
-};
+
 
 #endif /* shaderTypes_h */

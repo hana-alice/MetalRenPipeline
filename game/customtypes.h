@@ -13,7 +13,25 @@
 typedef struct
 {
     vector_float4 pos;
-    vector_float2 texCoord;
+    vector_float3 color;
+    vector_float2 texCoords;
 }Vertex;
+
+typedef struct
+{
+    matrix_float4x4 projMat;
+    matrix_float4x4 modelMat;
+}UniformMatrix;
+
+enum VertexInputIndex
+{
+    VERTEX = 0,
+    MATRIX
+};
+
+enum FragmentInputIndex
+{
+    TEXTURE = 0
+};
 
 #endif /* types_h */
