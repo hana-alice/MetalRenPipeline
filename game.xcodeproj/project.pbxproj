@@ -16,6 +16,9 @@
 		13414F13257D26D6000F6BF6 /* viewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13414F0F257D26D6000F6BF6 /* viewController.m */; };
 		13414F14257D26D6000F6BF6 /* youma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13414F10257D26D6000F6BF6 /* youma.jpg */; };
 		13414F7A257E6D60000F6BF6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13414F79257E6D60000F6BF6 /* AppDelegate.m */; };
+		13A224D025A4B29D0050F2FD /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A224CA25A4B29D0050F2FD /* AAPLMathUtilities.m */; };
+		13A224D125A4B29D0050F2FD /* AAPLMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13A224CD25A4B29D0050F2FD /* AAPLMesh.mm */; };
+		13A224D225A4B29D0050F2FD /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 13A224CF25A4B29D0050F2FD /* AAPLShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +58,13 @@
 		13414F18257D270C000F6BF6 /* customtypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customtypes.h; sourceTree = "<group>"; };
 		13414F78257E6D60000F6BF6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13414F79257E6D60000F6BF6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1363B2D9257F5FB700726695 /* shaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaderTypes.h; sourceTree = "<group>"; };
+		13A224C925A4B29D0050F2FD /* AAPLRendererUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLRendererUtils.h; path = game/AAPLRendererUtils.h; sourceTree = SOURCE_ROOT; };
+		13A224CA25A4B29D0050F2FD /* AAPLMathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAPLMathUtilities.m; path = game/AAPLMathUtilities.m; sourceTree = SOURCE_ROOT; };
+		13A224CB25A4B29D0050F2FD /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = game/AAPLShaderTypes.h; sourceTree = SOURCE_ROOT; };
+		13A224CC25A4B29D0050F2FD /* AAPLMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLMesh.h; path = game/AAPLMesh.h; sourceTree = SOURCE_ROOT; };
+		13A224CD25A4B29D0050F2FD /* AAPLMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AAPLMesh.mm; path = game/AAPLMesh.mm; sourceTree = SOURCE_ROOT; };
+		13A224CE25A4B29D0050F2FD /* AAPLMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLMathUtilities.h; path = game/AAPLMathUtilities.h; sourceTree = SOURCE_ROOT; };
+		13A224CF25A4B29D0050F2FD /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = game/AAPLShaders.metal; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +115,10 @@
 		13414EC3257D170B000F6BF6 /* game */ = {
 			isa = PBXGroup;
 			children = (
+				13A224C725A4B24D0050F2FD /* utils */,
 				13414F78257E6D60000F6BF6 /* AppDelegate.h */,
 				13414F79257E6D60000F6BF6 /* AppDelegate.m */,
 				13414F0E257D26D6000F6BF6 /* shadertest.metal */,
-				1363B2D9257F5FB700726695 /* shaderTypes.h */,
 				13414F0D257D26D6000F6BF6 /* viewController.h */,
 				13414F0F257D26D6000F6BF6 /* viewController.m */,
 				13414F10257D26D6000F6BF6 /* youma.jpg */,
@@ -139,6 +148,20 @@
 				13414EEE257D170B000F6BF6 /* Info.plist */,
 			);
 			path = gameUITests;
+			sourceTree = "<group>";
+		};
+		13A224C725A4B24D0050F2FD /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				13A224CE25A4B29D0050F2FD /* AAPLMathUtilities.h */,
+				13A224CA25A4B29D0050F2FD /* AAPLMathUtilities.m */,
+				13A224CC25A4B29D0050F2FD /* AAPLMesh.h */,
+				13A224CD25A4B29D0050F2FD /* AAPLMesh.mm */,
+				13A224C925A4B29D0050F2FD /* AAPLRendererUtils.h */,
+				13A224CF25A4B29D0050F2FD /* AAPLShaders.metal */,
+				13A224CB25A4B29D0050F2FD /* AAPLShaderTypes.h */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,8 +294,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				13414F7A257E6D60000F6BF6 /* AppDelegate.m in Sources */,
+				13A224D025A4B29D0050F2FD /* AAPLMathUtilities.m in Sources */,
+				13A224D225A4B29D0050F2FD /* AAPLShaders.metal in Sources */,
 				13414ED7257D170B000F6BF6 /* main.m in Sources */,
 				13414F13257D26D6000F6BF6 /* viewController.m in Sources */,
+				13A224D125A4B29D0050F2FD /* AAPLMesh.mm in Sources */,
 				13414F12257D26D6000F6BF6 /* shadertest.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
