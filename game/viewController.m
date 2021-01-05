@@ -119,10 +119,10 @@
 -(void) setupMatrix: (id<MTLRenderCommandEncoder>) renEncoder
 {
     float aspect = self._viewportSize.x / self._viewportSize.y;
-    //matrix_float4x4 projMat = matrix_perspective_right_hand(65.0f * M_PI / 180.0f, aspect, 0.1f, 100.0f);
-    matrix_float4x4 projMat = matrix4x4_translation(0.0f, 0.0f, 0.0f);
+    matrix_float4x4 projMat = matrix4x4_perspective(aspect, 65.0f * M_PI / 180.0f, 0.1f, 100.0f);
+    //matrix_float4x4 projMat = matrix4x4_translation(0.0f, 0.0f, 0.0f);
     static float rotation = 0.0f;
-    matrix_float4x4 modelMat = matrix4x4_rotation(rotation, vector3(0.0f, 0.0f, 1.0f));
+    matrix_float4x4 modelMat = matrix4x4_translation(0.0f, 0.0f, 1.0f);//matrix4x4_rotation(rotation, vector3(0.0f, 0.0f, 1.0f));
     rotation += M_PI/120.0f;
     
     UniformMatrix mat = {projMat, modelMat};
@@ -138,7 +138,7 @@
     MTLRenderPassDescriptor* renderPassDesc = self._view.currentRenderPassDescriptor;
     renderPassDesc.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 1.0, 1.0, 1.0);
     id<MTLRenderCommandEncoder> renEncoder = [cmdBuffer renderCommandEncoderWithDescriptor:renderPassDesc];
-    [renEncoder setViewport:(MTLViewport){0.0, 0.0, self._viewportSize.x, self._viewportSize.y, -1.0, 1.0}];
+    [renEncoder setViewport:(MTLViewport){0.0, 0.0, self._viewportSize.x, self._viewportSize.y, 0.1f, 100.0f}];
     [renEncoder setRenderPipelineState: self._pipelineState];
     
     [self setupMatrix:renEncoder];
@@ -194,18 +194,32 @@ static matrix_float4x4 matrix4x4_rotation(float radians, vector_float3 axis)
     }};
 }
 
-matrix_float4x4 matrix_perspective_right_hand(float fovyRadians, float aspect, float nearZ, float farZ)
+matrix_float4x4 matrix4x4_uniform_scale(float scale)
 {
-    float ys = 1 / tanf(fovyRadians * 0.5);
-    float xs = ys / aspect;
-    float zs = farZ / (nearZ - farZ);
+    vector_float4 X = { scale, 0, 0, 0 };
+    vector_float4 Y = { 0, scale, 0, 0 };
+    vector_float4 Z = { 0, 0, scale, 0 };
+    vector_float4 W = { 0, 0, 0, 1 };
 
-    return (matrix_float4x4) {{
-        { xs,   0,          0,  0 },
-        {  0,  ys,          0,  0 },
-        {  0,   0,         zs, -1 },
-        {  0,   0, nearZ * zs,  0 }
-    }};
+    matrix_float4x4 mat = { X, Y, Z, W };
+    return mat;
 }
+
+matrix_float4x4 matrix4x4_perspective(float aspect, float fovy, float near, float far)
+{
+    float yScale = 1 / tan(fovy * 0.5);
+    float xScale = yScale / aspect;
+    float zScale = far / (far - near);
+
+    vector_float4 P = { xScale, 0, 0, 0 };
+    vector_float4 Q = { 0, yScale, 0, 0 };
+    vector_float4 R = { 0, 0, zScale, 1 };
+    vector_float4 S = { 0, 0, -near * zScale, 0 };
+
+    matrix_float4x4 mat = { P, Q, R, S };
+    return mat;
+}
+
+
 
 @end
