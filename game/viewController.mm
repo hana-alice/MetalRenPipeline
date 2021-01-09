@@ -1,5 +1,5 @@
 //
-//  viewController.m
+//  viewController.mm
 //  LearnMetal
 //
 //  Created by 李泽强 on 2020/12/6.
@@ -9,6 +9,11 @@
 #import "customtypes.h"
 #import "AppDelegate.h"
 #import "viewController.h"
+#import "utils/AAPLMesh.h"
+#import "utils/AAPLRendererUtils.h"
+#import <simd/simd.h>
+
+constexpr unsigned int SAMPLE_COUNT = 8;
 
 
 @interface TestViewController () <MTKViewDelegate>
@@ -22,20 +27,24 @@
 @property (nonatomic, strong) id<MTLBuffer> _indices;
 @property (nonatomic, assign) NSUInteger _numIndices;
 @property (nonatomic, assign) NSUInteger _numVerts;
-
 @end
 
 @implementation TestViewController
+{
+    Camera _camera;
+    AAPLActorData* actor;
+}
 
 -(void) viewDidLoad
 {
     [super viewDidLoad];
     
     self._view = [[MTKView alloc] initWithFrame:self.view.bounds];
+    self._view.sampleCount = SAMPLE_COUNT;
     self._view.device = MTLCreateSystemDefaultDevice();
     self.view = self._view;
     self._view.delegate = self;
-    self._viewportSize = (vector_uint2){self._view.drawableSize.width, self._view.drawableSize.height};
+    self._viewportSize = (vector_uint2){(uint)self._view.drawableSize.width, (uint)self._view.drawableSize.height};
     
     [self customInit];
 }
@@ -56,6 +65,7 @@
     MTLRenderPipelineDescriptor* pipelineDesc = [[MTLRenderPipelineDescriptor alloc] init];
     pipelineDesc.vertexFunction = vertexFunc;
     pipelineDesc.fragmentFunction = fragmentFunc;
+    pipelineDesc.sampleCount = SAMPLE_COUNT;
     pipelineDesc.colorAttachments[0].pixelFormat = self._view.colorPixelFormat;
     self._pipelineState = [self._view.device newRenderPipelineStateWithDescriptor:pipelineDesc
                                                                             error:NULL];
@@ -116,16 +126,28 @@
     }
 }
 
+-(void) setupCamera
+{
+    //TODO: encapsulate camera later.
+    struct Camera cam = _camera;
+    cam.position = (vector_float3){3.0f, 3.0f, -1.0f};
+    cam.target = (vector_float3){0.0f, 0.0f, 0.0f};
+    cam.rotation = 0.0f;
+    cam.aspectRatio = self._viewportSize.x / (float)self._viewportSize.y;
+    cam.fovVert_Half = 5.0f * M_PI / 180.0f;
+}
+
 -(void) setupMatrix: (id<MTLRenderCommandEncoder>) renEncoder
 {
-    float aspect = self._viewportSize.x / self._viewportSize.y;
-    matrix_float4x4 projMat = matrix4x4_perspective(aspect, 65.0f * M_PI / 180.0f, 0.1f, 100.0f);
+    float aspect = self._viewportSize.x / (float)self._viewportSize.y;
+    matrix_float4x4 modelMat = matrix_identity_float4x4;
+    matrix_float4x4 viewMat = matrix_look_at_left_hand((vector_float3){3.0f, 3.0f, -1.0f}, (vector_float3){0.0f, 0.0f, 0.0f}, (vector_float3){0.0f, 1.0f, 0.0f});
+    matrix_float4x4 projMat = matrix_perspective_left_hand(50.0f * M_PI / 180.0f, aspect, 0.1f, 100.0f);
     //matrix_float4x4 projMat = matrix4x4_translation(0.0f, 0.0f, 0.0f);
     static float rotation = 0.0f;
-    matrix_float4x4 modelMat = matrix4x4_translation(0.0f, 0.0f, 1.0f);//matrix4x4_rotation(rotation, vector3(0.0f, 0.0f, 1.0f));
     rotation += M_PI/120.0f;
     
-    UniformMatrix mat = {projMat, modelMat};
+    UniformMatrix mat = {modelMat, viewMat, projMat};
     
     [renEncoder setVertexBytes:&mat
                         length:sizeof(UniformMatrix)
@@ -138,7 +160,7 @@
     MTLRenderPassDescriptor* renderPassDesc = self._view.currentRenderPassDescriptor;
     renderPassDesc.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 1.0, 1.0, 1.0);
     id<MTLRenderCommandEncoder> renEncoder = [cmdBuffer renderCommandEncoderWithDescriptor:renderPassDesc];
-    [renEncoder setViewport:(MTLViewport){0.0, 0.0, self._viewportSize.x, self._viewportSize.y, 0.1f, 100.0f}];
+    [renEncoder setViewport:(MTLViewport){0.0, 0.0, (double)self._viewportSize.x, (double)self._viewportSize.y, 0.1f, 100.0f}];
     [renEncoder setRenderPipelineState: self._pipelineState];
     
     [self setupMatrix:renEncoder];
@@ -165,61 +187,5 @@
 - (void)encodeWithCoder:(nonnull NSCoder *)coder {
     
 }
-
-#pragma mark Matrix Math Utilities
-
-matrix_float4x4 matrix4x4_translation(float tx, float ty, float tz)
-{
-    return (matrix_float4x4) {{
-        { 1,   0,  0,  0 },
-        { 0,   1,  0,  0 },
-        { 0,   0,  1,  0 },
-        { tx, ty, tz,  1 }
-    }};
-}
-
-static matrix_float4x4 matrix4x4_rotation(float radians, vector_float3 axis)
-{
-    axis = vector_normalize(axis);
-    float ct = cosf(radians);
-    float st = sinf(radians);
-    float ci = 1 - ct;
-    float x = axis.x, y = axis.y, z = axis.z;
-
-    return (matrix_float4x4) {{
-        { ct + x * x * ci,     y * x * ci + z * st, z * x * ci - y * st, 0},
-        { x * y * ci - z * st,     ct + y * y * ci, z * y * ci + x * st, 0},
-        { x * z * ci + y * st, y * z * ci - x * st,     ct + z * z * ci, 0},
-        {                   0,                   0,                   0, 1}
-    }};
-}
-
-matrix_float4x4 matrix4x4_uniform_scale(float scale)
-{
-    vector_float4 X = { scale, 0, 0, 0 };
-    vector_float4 Y = { 0, scale, 0, 0 };
-    vector_float4 Z = { 0, 0, scale, 0 };
-    vector_float4 W = { 0, 0, 0, 1 };
-
-    matrix_float4x4 mat = { X, Y, Z, W };
-    return mat;
-}
-
-matrix_float4x4 matrix4x4_perspective(float aspect, float fovy, float near, float far)
-{
-    float yScale = 1 / tan(fovy * 0.5);
-    float xScale = yScale / aspect;
-    float zScale = far / (far - near);
-
-    vector_float4 P = { xScale, 0, 0, 0 };
-    vector_float4 Q = { 0, yScale, 0, 0 };
-    vector_float4 R = { 0, 0, zScale, 1 };
-    vector_float4 S = { 0, 0, -near * zScale, 0 };
-
-    matrix_float4x4 mat = { P, Q, R, S };
-    return mat;
-}
-
-
 
 @end

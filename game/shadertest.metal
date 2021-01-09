@@ -22,7 +22,7 @@ vertex RasterizeData vertsShader(uint vertexID[[vertex_id]],
                                  constant UniformMatrix* matrix[ [buffer(MATRIX)] ] )
 {
     RasterizeData out;
-    out.clipSpacePos = matrix->projMat * matrix->modelMat * vertsArr[vertexID].pos;
+    out.clipSpacePos = matrix->projMat * matrix->viewMat * matrix->modelMat * vertsArr[vertexID].pos;
     out.texCoords = vertsArr[vertexID].texCoords;
     out.color = vertsArr[vertexID].color;
     return out;

@@ -19,8 +19,9 @@ typedef struct
 
 typedef struct
 {
-    matrix_float4x4 projMat;
     matrix_float4x4 modelMat;
+    matrix_float4x4 viewMat;
+    matrix_float4x4 projMat;
 }UniformMatrix;
 
 enum VertexInputIndex
