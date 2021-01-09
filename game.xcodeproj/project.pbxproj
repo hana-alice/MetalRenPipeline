@@ -19,8 +19,8 @@
 		13414EED257D170B000F6BF6 /* gameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13414EEC257D170B000F6BF6 /* gameUITests.m */; };
 		13414F12257D26D6000F6BF6 /* shadertest.metal in Sources */ = {isa = PBXBuildFile; fileRef = 13414F0E257D26D6000F6BF6 /* shadertest.metal */; };
 		13414F13257D26D6000F6BF6 /* viewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13414F0F257D26D6000F6BF6 /* viewController.mm */; };
-		13414F14257D26D6000F6BF6 /* youma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13414F10257D26D6000F6BF6 /* youma.jpg */; };
 		13414F7A257E6D60000F6BF6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13414F79257E6D60000F6BF6 /* AppDelegate.m */; };
+		13AFED9F25A9AF2100D48DCF /* model in Resources */ = {isa = PBXBuildFile; fileRef = 13AFED9E25A9AF2100D48DCF /* model */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,10 +65,10 @@
 		13414F0D257D26D6000F6BF6 /* viewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewController.h; sourceTree = "<group>"; };
 		13414F0E257D26D6000F6BF6 /* shadertest.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = shadertest.metal; sourceTree = "<group>"; };
 		13414F0F257D26D6000F6BF6 /* viewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = viewController.mm; sourceTree = "<group>"; };
-		13414F10257D26D6000F6BF6 /* youma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = youma.jpg; sourceTree = "<group>"; };
 		13414F18257D270C000F6BF6 /* customtypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customtypes.h; sourceTree = "<group>"; };
 		13414F78257E6D60000F6BF6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13414F79257E6D60000F6BF6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		13AFED9E25A9AF2100D48DCF /* model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = model; path = resource/model; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,13 +131,13 @@
 		13414EC3257D170B000F6BF6 /* game */ = {
 			isa = PBXGroup;
 			children = (
+				13AFED9E25A9AF2100D48DCF /* model */,
 				13A224C725A4B24D0050F2FD /* utils */,
 				13414F78257E6D60000F6BF6 /* AppDelegate.h */,
 				13414F79257E6D60000F6BF6 /* AppDelegate.m */,
 				13414F0E257D26D6000F6BF6 /* shadertest.metal */,
 				13414F0D257D26D6000F6BF6 /* viewController.h */,
 				13414F0F257D26D6000F6BF6 /* viewController.mm */,
-				13414F10257D26D6000F6BF6 /* youma.jpg */,
 				13414ED0257D170B000F6BF6 /* Assets.xcassets */,
 				13414ED2257D170B000F6BF6 /* Main.storyboard */,
 				13414ED5257D170B000F6BF6 /* Info.plist */,
@@ -282,7 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13414F14257D26D6000F6BF6 /* youma.jpg in Resources */,
+				13AFED9F25A9AF2100D48DCF /* model in Resources */,
 				13414ED1257D170B000F6BF6 /* Assets.xcassets in Resources */,
 				13414ED4257D170B000F6BF6 /* Main.storyboard in Resources */,
 			);

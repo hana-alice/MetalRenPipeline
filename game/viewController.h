@@ -14,6 +14,10 @@
 
 @interface TestViewController : NSViewController
 
+-(void)init;
+
+-(void)destroy;
+
 @end
 
 

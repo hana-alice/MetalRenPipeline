@@ -44,6 +44,7 @@ Implementation for Mesh and Submesh objects
             NSMutableString *URLString = [[NSMutableString alloc] initWithString:@"file://"];
             [URLString appendString:property.stringValue];
             textureURL = [NSURL URLWithString:URLString];
+            textureURL = property.URLValue;
         }
         else
         {
